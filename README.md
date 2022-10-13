@@ -22,32 +22,50 @@ For example, your program should be able to evaluate such expressions as:
 - and without spaces  
   `591+10*6/(442-3*(61+7-8))+4/2`
 
-# High-level view of the algorithm
+# High-level overview of the algorithm
 
 1. Read user's input into a `String` and replace all spaces with an empty string.
 
 2. Parse the input according to the "infix to postfix" conversion algorithm using stacks as we did in class (follow the video recording on "Canvas -> Zoom" from October 10th - that's when we went over it).
 
-3. Evaluate the postfix expression using stacks and the last number you pop out from the stack will be your final result.
+3. Evaluate the postfix expression using a stack. The last number you pop out from the stack will be your final result.
 
-4. Google, google, and again, google (and youtube it). May the google be with you (or duckduckgo/startpage if you prefer privacy).
+4. Google, google, and again, google (and youtube it). May google be with you (or duckduckgo/startpage if you prefer privacy).
 
 # Deeper algorithm ideas
 
 ## Infix to postfix conversion
 
-Let's say you have the following input: `2 + 3 * ((5 - 8 / 4) + 6) / 9`, and you also created an `ArrayList<String> out` that will store the postfix notation of your input. You also created a `Stack<String> ops` that will store your operators. Let's read it from left to right, following the rules:
+Let's say you have the following input: `2 + 3 * ((5 - 8 / 4) + 6) / 9`, and you also created an `ArrayList<String> out` that will store the postfix notation of your input. You also created a `Stack<String> ops` that will store your operators. Let's read your input from left to right, following the rules:
 
-1. Operand -> add it to the `out`. NOTE: operands will be multi-digit numbers such as `234 + 45`. We simplified it to single-digit numbers for the example sake.
-2. Operator -> check what is on the `ops` stack:
+1. Operand -> add it to the `out`. **NOTE**: operands will be multi-digit numbers such as in the expression `234 + 45`. We simplified it to single-digit numbers for the example's sake.
+2. Operator that is among `+, -, *, /` -> check what is on the `ops` stack:
    - if `ops` is empty, push the operator to `ops`
    - if `ops.peek()` has `(`, push the operator to `ops`
-   - if `ops.peek()` contains an operator that is _less_ than the current operator (on the precedence scale according to PEMDAS), **continuously** (in a loop) pop from `ops` stack to `out` _until_ `ops.peek()` has an operator that is either a `(`, the same/greater precedence scale, or does not exist (meaning that `ops` is empty)
-   - if neither of the above cases happened, then just push the operator to the `ops` stack
-3. `(` -> push it to the `ops` stack
-4. `)` -> do the following:
-   - continuously pop from the `ops` stack until you encounter `(`
+   - if `ops.peek()` contains an operator that is _greater_ than or _equal_ to the current operator (on the precedence scale according to PEMDAS), **continuously** (in a loop) pop from `ops` stack to `out` _until_ `ops.peek()` has an operator that is `(`, `ops.peek()` has an operator with a smaller precedence value, or `ops` is empty
+   - if **neither** of the above cases happened, then just push the operator to the `ops` stack
+3. Operator `(` -> push it to the `ops` stack
+4. Operator `)` -> do the following two steps:
+   - continuously pop from the `ops` stack _until_ you encounter `(`
    - pop `(` from the stack as it's going to be at the top of the stack and you do not want it to be added to `out`
+
+## Evaluation of the postfix notation
+
+Let's  continue working with the `ArrayList<String> out` that you generated from the previous section. In this case, your `out` contains the following **Strings**:
+
+```
+["2", "3", "5", "8", "4", "/", "-", "6", "+", "*", "9", "/", "+"]
+```
+
+Let's create a `Stack<String> nums` which we will use to keep track of all operands. Read the items from `nums` from left to right and apply the following rules:
+
+1. Operand -> convert to a `double` and add it to `nums`
+2. Operator -> follow these steps:
+   - `pop` two items from `nums`
+   - apply the operator on those two items
+   - `push` the result back to `nums`
+
+When you are done processing `out` items, your final calculated result will be the last item in your `nums` that you can pop and return as a value.
 
 # Bonus
 
@@ -61,4 +79,4 @@ Let's say you have the following input: `2 + 3 * ((5 - 8 / 4) + 6) / 9`, and you
     - try to evaluate expressions that do not make sense (e.g., 5+++3--8*/+9).
     - Additionally, you can explain to me every line of your code and answer any questions about your code.
 
- If you do all of these bonus options - that is an ultra-kill, so it is worth +50 to your midterm quiz or final.
+If you do all of these bonus options - that is an ultra-kill, so it is worth +50 to your midterm quiz or final.
