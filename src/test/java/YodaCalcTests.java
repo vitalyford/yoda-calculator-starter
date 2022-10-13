@@ -10,7 +10,7 @@ import java.io.*;
  * 
  * @author Vitaly Ford
  */ 
-public class LinkedListTests {
+public class YodaCalcTests {
     @Test
     public void simpleNestedParenthesisWithSingleDigits() {
         assertEquals(5.0, YodaCalc.calc("2 + 3 * ((5 - 8 / 4) + 6) / 9"));
