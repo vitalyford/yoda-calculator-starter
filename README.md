@@ -1,6 +1,6 @@
 # Intro
 
-You are tasked to develop a program that can evaluate mathematical expressions of any length and complexity. Do NOT worry about unary operators (-), such as
+You are tasked to develop a program that can evaluate mathematical expressions of any length and complexity. Do **NOT** worry about unary operators (-), such as
 
 ```
 -3 + 5
