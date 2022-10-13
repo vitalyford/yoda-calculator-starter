@@ -6,7 +6,8 @@ public class YodaCalc {
      * evaluates the math expression, and
      * returns the result as a decimal value.
      * 
-     * @param   input   the input string, supporting: +, -, *, /, (, )
+     * @param   input   the input math string,
+     *                  supporting: +, -, *, /, (, )
      * @return          the evaluated result
      */
     public static double calc(String input) {
