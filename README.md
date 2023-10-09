@@ -26,7 +26,7 @@ For example, your program should be able to evaluate such expressions as:
 
 1. Read user's input into a `String` and replace all spaces with an empty string.
 
-2. Parse the input according to the "infix to postfix" conversion algorithm using stacks as we did in class (follow the video recording on "Canvas -> Zoom" from October 10th - that's when we went over it).
+2. Parse the input according to the "infix to postfix" conversion algorithm using stacks as we did in class (follow the video recordings on "Canvas -> Zoom" from October 9th and 11th - that's when we went over it).
 
 3. Evaluate the postfix expression using a stack. The last number you pop out from the stack will be your final result.
 
