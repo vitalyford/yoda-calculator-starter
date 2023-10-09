@@ -40,14 +40,14 @@ Let's say you have the following input: `2 + 3 * ((5 - 8 / 4) + 6) / 9`, and you
 
 1. Operand -> add it to the `out`. **NOTE**: operands will be multi-digit numbers such as in the expression `234 + 45`. We simplified it to single-digit numbers for the example's sake.
 2. Operator that is among `+, -, *, /` -> check what is on the `ops` stack:
-   - if `ops` is empty, push the operator to `ops`
-   - if `ops.peek()` has `(`, push the operator to `ops`
-   - if `ops.peek()` contains an operator that is _greater_ than or _equal_ to the current operator (on the precedence scale according to PEMDAS), **continuously** (in a loop) pop from `ops` stack to `out` _until_ `ops.peek()` has an operator that is `(`, `ops.peek()` has an operator with a smaller precedence value, or `ops` is empty
-   - if **neither** of the above cases happened, then just push the operator to the `ops` stack
+   - If `ops` is empty, push the operator to `ops`.
+   - If `ops.peek()` has `(`, push the operator to `ops`.
+   - If `ops.peek()` contains an operator that is _greater_ than or _equal_ to the current operator (on the precedence scale according to PEMDAS), **continuously** (in a loop) pop from `ops` stack to `out` _until_ `ops.peek()` has an operator that is `(`, `ops.peek()` has an operator with a smaller precedence value, or `ops` is empty. Afterward, push the current operator into the `ops` stack.
+   - If **neither** of the above cases happened, then just push the operator to the `ops` stack.
 3. Operator `(` -> push it to the `ops` stack
 4. Operator `)` -> do the following two steps:
-   - continuously pop from the `ops` stack _until_ you encounter `(`
-   - pop `(` from the stack as it's going to be at the top of the stack and you do not want it to be added to `out`
+   - Continuously pop from the `ops` stack _until_ you encounter `(`.
+   - Pop `(` from the stack as it's going to be at the top of the stack and you do not want it to be added to `out`.
 
 ## Evaluation of the postfix notation
 
